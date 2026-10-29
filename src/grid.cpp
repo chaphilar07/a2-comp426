@@ -48,3 +48,13 @@ grid_counts grid_count(void) {
     }
   return c;
 }
+
+unsigned long long grid_checksum(void) {
+  unsigned long long h = 1469598103934665603ULL;
+  for (int y = 0; y < H; y++)
+    for (int x = 0; x < W; x++) {
+      h = (h ^ cur[y][x]) * 1099511628211ULL;
+      h = (h ^ (med[y][x] == stamp)) * 1099511628211ULL;
+    }
+  return h;
+}
