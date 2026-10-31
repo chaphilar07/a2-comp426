@@ -1,0 +1,19 @@
+%%{init: {"sequence": {"actorMargin": 380, "noteMargin": 12, "width": 340, "messageMargin":
+  40}}}%%
+  sequenceDiagram
+      participant C as Control thread (main)
+      participant P as TBB worker pool
+
+      Note over C: timer fires every 1/30 s
+      Note over C: stamp = stamp + 1
+      Note over C,P: arena.execute: control thread joins the pool
+      Note over P: task_group:<br/>one task per injection
+      Note over P: each task moves its medicine cells<br/>(nested parallel_for)
+      Note over C,P: join 1: task_group::wait
+      Note over P: parallel_for<br/>over row chunks
+      Note over P: rules 1 and 2, mark absorbed<br/>medicine, colour pixels
+      Note over C,P: join 2: parallel_for returns
+      Note over C: swap cur / next
+      Note over C: glDrawPixels,<br/>update throughput
+      Note over P: workers idle<br/>until the next step
+
