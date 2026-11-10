@@ -26,6 +26,10 @@ static unsigned long long n_steps = 0;
  * the same core's cache again. */
 static tbb::affinity_partitioner rows_ap;
 
+/*
+ * This is the row and particle grain the number of rows and particles any
+ * thread can handle at one time.
+ */
 enum { ROW_GRAIN = 8, PARTICLE_GRAIN = 1024 };
 
 void init(int threads) {

@@ -1,4 +1,3 @@
-
 #include "medicine.h"
 #include "grid.h"
 #include <cmath>
@@ -32,6 +31,11 @@ void injection::init(int x0, int y0, int n) {
   }
 }
 
+/*
+ * NOTE: the i0 and i1 indices are to iterate over a certain number of particles
+ * this is for intel TBB so that it can work on different sections essentially
+ * data parallelism
+ */
 void injection::move(size_t i0, size_t i1, uint32_t prev) {
   for (size_t i = i0; i < i1; i++) {
     particle &q = p[i];

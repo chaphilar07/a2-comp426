@@ -29,19 +29,24 @@ case "$1" in
     128,480,800 384,480,800 640,480,800 896,480,800 \
     128,672,800 384,672,800 640,672,800 896,672,800
   ;;
+
 7)
+  echo "7: one very large injection in the center of the display"
+  ./cellsim 512,384,20000
+  ;;
+8)
   echo "7: rule tests, 24 threads == 1 thread"
   make test
   ;;
-8)
+9)
   echo "8: every step checked against a sequential reference"
   make ordertest
   ;;
-9)
+10)
   echo "9: same test with the join removed - must FAIL"
   make brokentest
   ;;
-10)
+11)
   echo "10: throughput vs threads"
   make bench
   ;;
